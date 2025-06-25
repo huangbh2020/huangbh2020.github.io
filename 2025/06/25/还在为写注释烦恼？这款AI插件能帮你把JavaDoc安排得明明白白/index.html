@@ -1,37 +1,727 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh">
+    <!-- title -->
+<!-- keywords -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="huangbh">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="huangbh">
+        <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    <meta name="description" content="">
+    <meta name="description" content="大家好，我又来折腾了。还是我，那个沉迷于用代码解决代码问题的全栈小弟。 自从上次做了“命名神器”插件后，我写代码的幸福感确实提升了不少。但作为一个开发者，我们的“痛点”就像野草，割了一茬又长一茬。这不，最近我又被一个新的问题给缠上了——写代码注释。 说起注释，我们对它真是又爱又恨。  爱它：因为一份好的注释，能在几个月后拯救那个对着自己代码一脸懵逼的你，也能让接手你代码的同事对你心存感激。 恨它：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="还在为写注释烦恼？这款AI插件能帮你把JavaDoc安排得明明白白">
+<meta property="og:url" content="https://blog.icanshock.fun/2025/06/25/%E8%BF%98%E5%9C%A8%E4%B8%BA%E5%86%99%E6%B3%A8%E9%87%8A%E7%83%A6%E6%81%BC%EF%BC%9F%E8%BF%99%E6%AC%BEAI%E6%8F%92%E4%BB%B6%E8%83%BD%E5%B8%AE%E4%BD%A0%E6%8A%8AJavaDoc%E5%AE%89%E6%8E%92%E5%BE%97%E6%98%8E%E6%98%8E%E7%99%BD%E7%99%BD/index.html">
+<meta property="og:site_name" content="麦麦的小站">
+<meta property="og:description" content="大家好，我又来折腾了。还是我，那个沉迷于用代码解决代码问题的全栈小弟。 自从上次做了“命名神器”插件后，我写代码的幸福感确实提升了不少。但作为一个开发者，我们的“痛点”就像野草，割了一茬又长一茬。这不，最近我又被一个新的问题给缠上了——写代码注释。 说起注释，我们对它真是又爱又恨。  爱它：因为一份好的注释，能在几个月后拯救那个对着自己代码一脸懵逼的你，也能让接手你代码的同事对你心存感激。 恨它：">
+<meta property="og:locale">
+<meta property="og:image" content="https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/b0d84436c2c3479a8497bdc2f3d09adc~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5oiR5Lya5Yay5Ye75rOi:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMzQ3MDUxNDczMjE0OTQzOCJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751336974&x-orig-sign=/0bmvS/qZcDKKnxrTXDxgBVIok0=">
+<meta property="og:image" content="https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/acffb21766c44019a493c68c235f6bc1~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5oiR5Lya5Yay5Ye75rOi:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMzQ3MDUxNDczMjE0OTQzOCJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751336974&x-orig-sign=Ck/KR2Ezhod0qboqC2w9I+1NyAQ=">
+<meta property="article:published_time" content="2025-06-25T01:16:25.000Z">
+<meta property="article:modified_time" content="2025-06-25T01:25:49.804Z">
+<meta property="article:author" content="huangbh">
+<meta property="article:tag" content="智能注释">
+<meta property="article:tag" content="智普">
+<meta property="article:tag" content="IDEA插件">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/b0d84436c2c3479a8497bdc2f3d09adc~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5oiR5Lya5Yay5Ye75rOi:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMzQ3MDUxNDczMjE0OTQzOCJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751336974&x-orig-sign=/0bmvS/qZcDKKnxrTXDxgBVIok0=">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="icon" href="/assets/favicon.ico">
+    <title>还在为写注释烦恼？这款AI插件能帮你把JavaDoc安排得明明白白 · 麦麦的小站</title>
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+    (function (w) {
+        'use strict'
+        // rel=preload support test
+        if (!w.loadCSS) {
+            w.loadCSS = function () {}
+        }
+        // define on the loadCSS obj
+        var rp = (loadCSS.relpreload = {})
+        // rel=preload feature support test
+        // runs once and returns a function for compat purposes
+        rp.support = (function () {
+            var ret
+            try {
+                ret = w.document.createElement('link').relList.supports('preload')
+            } catch (e) {
+                ret = false
+            }
+            return function () {
+                return ret
+            }
+        })()
 
+        // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+        // then change that media back to its intended value on load
+        rp.bindMediaToggle = function (link) {
+            // remember existing media attr for ultimate state, or default to 'all'
+            var finalMedia = link.media || 'all'
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+            function enableStylesheet() {
+                link.media = finalMedia
+            }
 
-{% block page_class %}page-post-detail{% endblock %}
+            // bind load handlers to enable media
+            if (link.addEventListener) {
+                link.addEventListener('load', enableStylesheet)
+            } else if (link.attachEvent) {
+                link.attachEvent('onload', enableStylesheet)
+            }
 
+            // Set rel and non-applicable media type to start an async request
+            // note: timeout allows this to happen async to let rendering continue in IE
+            setTimeout(function () {
+                link.rel = 'stylesheet'
+                link.media = 'only x'
+            })
+            // also enable media after 3 seconds,
+            // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+            setTimeout(enableStylesheet, 3000)
+        }
 
-{% block content %}
+        // loop through link elements in DOM
+        rp.poly = function () {
+            // double check this to prevent external calls from running
+            if (rp.support()) {
+                return
+            }
+            var links = w.document.getElementsByTagName('link')
+            for (var i = 0; i < links.length; i++) {
+                var link = links[i]
+                // qualify links to those with rel=preload and as=style attrs
+                if (
+                    link.rel === 'preload' &&
+                    link.getAttribute('as') === 'style' &&
+                    !link.getAttribute('data-loadcss')
+                ) {
+                    // prevent rerunning on link
+                    link.setAttribute('data-loadcss', true)
+                    // bind listeners to toggle media back
+                    rp.bindMediaToggle(link)
+                }
+            }
+        }
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+        // if unsupported, run the polyfill
+        if (!rp.support()) {
+            // run once at least
+            rp.poly()
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+            // rerun poly on an interval until onload
+            var run = w.setInterval(rp.poly, 500)
+            if (w.addEventListener) {
+                w.addEventListener('load', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            } else if (w.attachEvent) {
+                w.attachEvent('onload', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            }
+        }
+
+        // commonjs
+        if (typeof exports !== 'undefined') {
+            exports.loadCSS = loadCSS
+        } else {
+            w.loadCSS = loadCSS
+        }
+    })(typeof global !== 'undefined' ? global : this)
+</script>
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .footer-fixed-btn,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(
+            -45deg,
+            #444 0,
+            #444 80px,
+            #333 80px,
+            #333 160px
+        );
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+
+    <link id="stylesheet-fancybox" rel="preload" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link id="stylesheet-base" rel="preload" href="/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link id="stylesheet-mobile" rel="preload" href="/css/mobile.css" as="style" onload="this.onload=null;this.rel='stylesheet';this.media='screen and (max-width: 960px)'">
+    <link id="stylesheet-theme-dark" rel="preload" href="/css/dark.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js" as="script">
+    <link rel="preload" href="/font/Oswald-Regular.ttf" as="font" crossorigin>
+    <link rel="preload" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" as="font" crossorigin>
+    <!-- algolia -->
+    <!-- 百度统计  -->
+    <!-- 谷歌统计  -->
+    <!-- Google tag (gtag.js) -->
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ == undefined) {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js" />')
+        }
+    </script>
+        <body class="post-body">
+        <!-- header -->
+        <header class="header header-mobile">
+    <!-- top read progress line -->
+    <div class="header-element">
+        <div class="read-progress"></div>
     </div>
-  </div>
+    <!-- sidebar menu button -->
+    <div class="header-element">
+        <div class="header-sidebar-menu">
+            <div style="padding-left: 1px;">&#xe775;</div>
+        </div>
+    </div>
+    <!-- header actions -->
+    <div class="header-actions">
+        <!-- theme mode switch button -->
+        <span class="header-theme-btn header-element">
+            <i class="fas fa-adjust"></i>
+        </span>
+        <!-- back to home page text -->
+        <span class="home-link header-element">
+            <a href="/">麦麦的小站</a>
+        </span>
+    </div>
+    <!-- toggle banner -->
+    <div class="banner">
+        <div class="blog-title header-element">
+            <a href="/">麦麦的小站</a>
+        </div>
+        <div class="post-title header-element">
+            <a href="#" class="post-name">还在为写注释烦恼？这款AI插件能帮你把JavaDoc安排得明明白白</a>
+        </div>
+    </div>
+</header>
 
-{% endblock %}
+        <!-- fixed footer -->
+        <footer class="footer-fixed">
+    <!-- donate button -->
+    <div class="donate-popup donate-popup--hidden">
+    <div class="donate-popup__title">Buy Me A Coffee</div>
+    <div class="donate-popup__content">
+        <div class="donate-popup__content-description">If this post helped you, please consider buying the author a cup of sugar-free coffee ☕️.</div>
+        <img
+            class="donate-popup__content-qrCode"
+            title="Wechat"
+            alt="Wechat"
+            src="/assets/donate-wechat.png"
+        ></img>
+        <img
+            class="donate-popup__content-qrCode"
+            title="Alipay"
+            alt="Alipay"
+            src="/assets/donate-alipay.png"
+        ></img>
+    </div>
+</div>
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <div
+        title="Donate to the author"
+        class="footer-fixed-btn footer-fixed-btn--hidden donate-btn"
+    >
+        <i class="fas fa-donate"></i>
+    </div>
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+    <!-- back to top button -->
+    <div class="footer-fixed-btn footer-fixed-btn--hidden back-top">
+        <div>&#xe639;</div>
+    </div>
+</footer>
+
+        <!-- wrapper -->
+        <div class="wrapper">
+            <div class="site-intro" style="    height:50vh;
+">
+    <!-- 主页  -->
+    <!-- 404页  -->
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+                还在为写注释烦恼？这款AI插件能帮你把JavaDoc安排得明明白白
+            <!-- 404 -->
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            <!-- 404 -->
+        </p>
+        <!-- 文章页 meta -->
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                    <div class="post-intro-tags" >
+        <a class="post-tag" href="javascript:void(0);" data-tags="智能注释">智能注释</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="智普">智普</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags="IDEA插件">IDEA插件</a>
+</div>
+
+                <!-- 文章字数统计 -->
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2025/06/25</span>
+                    <!-- busuanzi -->
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+    </div>
+</div>
+
+            <script>
+  // get user agent
+  function getBrowserVersions() {
+    var u = window.navigator.userAgent
+    return {
+      userAgent: u,
+      trident: u.indexOf('Trident') > -1, //IE内核
+      presto: u.indexOf('Presto') > -1, //opera内核
+      webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+      mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+      iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+      iPad: u.indexOf('iPad') > -1, //是否为iPad
+      webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+      weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+      uc: u.indexOf('UCBrowser') > -1, //是否为android下的UC浏览器
+    }
+  }
+  var browser = {
+    versions: getBrowserVersions(),
+  }
+  console.log('userAgent: ' + browser.versions.userAgent)
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded')
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document
+        .getElementsByClassName('intro-title')[0]
+        .classList.add('intro-fade-in')
+      document
+        .getElementsByClassName('intro-subtitle')[0]
+        .classList.add('intro-fade-in')
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in')
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb() {
+    if (browser.versions.uc) {
+      console.log('UCBrowser')
+      fontLoaded()
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular'],
+        },
+        loading: function () {
+          // 所有字体开始加载
+          // console.log('font loading');
+        },
+        active: function () {
+          // 所有字体已渲染
+          fontLoaded()
+        },
+        inactive: function () {
+          // 字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout')
+          fontLoaded()
+        },
+        timeout: 5000, // Set the timeout to two seconds
+      })
+    }
+  }
+
+  function asyncErr() {
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0]
+    o.src = u
+    if (cb) {
+      o.addEventListener(
+        'load',
+        function (e) {
+          cb(null, e)
+        },
+        false
+      )
+    }
+    if (err) {
+      o.addEventListener(
+        'error',
+        function (e) {
+          err(null, e)
+        },
+        false
+      )
+    }
+    s.parentNode.insertBefore(o, s)
+  }
+
+  var asyncLoadWithFallBack = function (arr, success, reject) {
+    var currReject = function () {
+      reject()
+      arr.shift()
+      if (arr.length) async(arr[0], success, currReject)
+    }
+
+    async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack(
+    [
+      'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js',
+      'https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js',
+      "/lib/webfontloader.min.js",
+    ],
+    asyncCb,
+    asyncErr
+  )
+</script>
+
+            <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" alt="loading">
+            <div class="container container-unloaded">
+                <main class="main post-page">
+    <article class="article-entry">
+        <p>大家好，我又来折腾了。还是我，那个沉迷于用代码解决代码问题的全栈小弟。</p>
+<p>自从上次做了“命名神器”插件后，我写代码的幸福感确实提升了不少。但作为一个开发者，我们的“痛点”就像野草，割了一茬又长一茬。这不，最近我又被一个新的问题给缠上了——<strong>写代码注释</strong>。</p>
+<p>说起注释，我们对它真是又爱又恨。</p>
+<ul>
+<li><strong>爱它</strong>：因为一份好的注释，能在几个月后拯救那个对着自己代码一脸懵逼的你，也能让接手你代码的同事对你心存感激。</li>
+<li><strong>恨它</strong>：因为写注释真的好麻烦！特别是写完一个复杂的方法后，那种大脑被掏空的感觉，实在不想再耗费心力去组织语言描述它。</li>
+</ul>
+<hr>
+<h2 id="title-git分支新建删除"><a href="#title-git分支新建删除" class="headerlink" title="title: git分支新建删除"></a>title: git分支新建删除</h2><p>市面上其实也有一些注释生成工具，我自己也用过。但用下来总感觉差点意思。它们大多是基于“翻译”的逻辑，简单地把你的方法名翻译成中文。</p>
+<p>这就导致一个很尴尬的问题：<strong>如果你的方法命名本身就不太规范，那生成的注释基本就等于废话。</strong></p>
+<p>比如我写了个方法叫 process(List<Data> dataList)，一个翻译工具可能会生成注释：&#x2F;&#x2F; 处理数据列表。</p>
+<p>这……说了跟没说一样啊！天知道我这个 process 方法里是过滤、是排序、还是做了什么复杂的业务聚合。</p>
+<p>我寻思着，现在大模型（LLM）的能力这么强，它连考试写论文都能搞定，难道还“读不懂”我区区一个方法吗？<strong>工具应该是“理解”我的代码，而不是简单地“翻译”我的方法名。</strong></p>
+<p>于是，肝了几个晚上，我为我的那个小小的IDEA插件，增加了一个我自己超爱用的新功能：</p>
+<p><img src="https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/b0d84436c2c3479a8497bdc2f3d09adc~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5oiR5Lya5Yay5Ye75rOi:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMzQ3MDUxNDczMjE0OTQzOCJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751336974&x-orig-sign=/0bmvS/qZcDKKnxrTXDxgBVIok0=" alt="image.png"></p>
+<p><strong>AI 智能注释！</strong></p>
+<p>它的使用方式，我设计得极其简单粗暴：</p>
+<ol>
+<li>把你的光标，<strong>放在需要生成注释的方法里的任何一个地方</strong>。你没看错，是方法体里的任何地方，不需要选中，不需要思考。</li>
+<li>轻轻按下快捷键：**<code>Alt + M</code>**（如果快捷键不行，可以修改其他的自己方便的快捷键）</li>
+<li>稍等片刻（大概一两秒，等待期间不用停留在页面等待，完成后会自动替换或者插入注释，速度取决于你的网络和选择的模型）。</li>
+</ol>
+<p>然后，见证奇迹的时刻就到了。一段由AI“读懂”你代码后，为你量身定做的注释，就会自动出现在方法的上方。</p>
+<p>我们还拿刚才那个 <code>process</code> 方法举例。哪怕你的方法名写得再随意，只要你的代码逻辑是清晰的，AI就能看懂。</p>
+<p><strong>【你的代码】</strong></p>
+<p>Java</p>
+<pre><code>public List&lt;String&gt; process(List&lt;User&gt; userList) &#123;
+    List&lt;String&gt; result = new ArrayList&lt;&gt;();
+    for (User user : userList) &#123;
+        if (user.isActive() &amp;&amp; user.getAge() &gt; 18) &#123;
+            result.add(user.getEmail());
+        &#125;
+    &#125;
+    return result;
+&#125;
+</code></pre>
+<p><strong>【按下 <code>Alt + M</code> 后】</strong></p>
+<p>Java</p>
+<pre><code>/**
+ * 从用户列表中筛选出状态为活跃且年龄大于18岁的用户，并返回他们的邮箱地址列表。
+ *
+ * @param userList 用户对象列表
+ * @return 符合条件的用户的邮箱地址列表
+ */
+public List&lt;String&gt; process(List&lt;User&gt; userList) &#123;
+    // ... 方法体 ...
+&#125;
+</code></pre>
+<p>看到没！它直接看懂了你的代码逻辑，而不是管你那个叫 <code>process</code> 还是 <code>handle</code> 的烂名字。这才是真正的智能，这才是我们想要的工具！</p>
+<p>当然，考虑到大家对注释的详细程度有不同偏好，我在插件的设置页面里，也提供了两种模式供你选择：</p>
+<ul>
+<li><p><strong>简单模式</strong>：成标准的 Javadoc 风格注释，包含对参数(<code>@param</code>)和返回值(<code>@return</code>)的简单说明。</p>
+</li>
+<li><p><strong>详细模式</strong>：生成标准的 Javadoc 风格注释，包含对参数(<code>@param</code>)和返回值(<code>@return</code>)的详细说明，非常适合写库或者重要接口。</p>
+<p>同时支持智普ai的多种模型，不同的模型速度和效果都有差异，可以在智普的开放平台，申请好apikey,进行使用，如果不想申请，可以使用作者的apikey,但是速度比较慢，建议还是自行申请。</p>
+</li>
+</ul>
+<p><img src="https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/acffb21766c44019a493c68c235f6bc1~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5oiR5Lya5Yay5Ye75rOi:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMzQ3MDUxNDczMjE0OTQzOCJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1751336974&x-orig-sign=Ck/KR2Ezhod0qboqC2w9I+1NyAQ=" alt="image.png"></p>
+<p>这个功能，我自己现在已经用得停不下来了。每次写完一个方法，顺手按一下 <code>Alt+M</code>，已经成了一种肌肉记忆。</p>
+<p>如果你已经安装了我的插件，直接更新到最新版即可体验。</p>
+<p>如果还没尝试过的朋友，欢迎在 IDEA 插件市场搜索 “Easy Naming” (对，还是那个命名神器，现在它更强大了) 下载使用。</p>
+<p>希望这个小功能，能再次为你节省一点点宝贵的时间和脑力，让我们能更专注于创造本身。</p>
+<p>—— 一个持续为开发者幸福感而折腾的全栈小弟</p>
+
+    </article>
+    <!-- license -->
+        <div class="license-wrapper">
+            <p>原文作者：<a href="https://blog.icanshock.fun">huangbh</a>
+            <p>原文链接：<a href="https://blog.icanshock.fun/2025/06/25/%E8%BF%98%E5%9C%A8%E4%B8%BA%E5%86%99%E6%B3%A8%E9%87%8A%E7%83%A6%E6%81%BC%EF%BC%9F%E8%BF%99%E6%AC%BEAI%E6%8F%92%E4%BB%B6%E8%83%BD%E5%B8%AE%E4%BD%A0%E6%8A%8AJavaDoc%E5%AE%89%E6%8E%92%E5%BE%97%E6%98%8E%E6%98%8E%E7%99%BD%E7%99%BD/">https://blog.icanshock.fun/2025/06/25/%E8%BF%98%E5%9C%A8%E4%B8%BA%E5%86%99%E6%B3%A8%E9%87%8A%E7%83%A6%E6%81%BC%EF%BC%9F%E8%BF%99%E6%AC%BEAI%E6%8F%92%E4%BB%B6%E8%83%BD%E5%B8%AE%E4%BD%A0%E6%8A%8AJavaDoc%E5%AE%89%E6%8E%92%E5%BE%97%E6%98%8E%E6%98%8E%E7%99%BD%E7%99%BD/</a>
+            <p>发表日期：<a href="https://blog.icanshock.fun/2025/06/25/%E8%BF%98%E5%9C%A8%E4%B8%BA%E5%86%99%E6%B3%A8%E9%87%8A%E7%83%A6%E6%81%BC%EF%BC%9F%E8%BF%99%E6%AC%BEAI%E6%8F%92%E4%BB%B6%E8%83%BD%E5%B8%AE%E4%BD%A0%E6%8A%8AJavaDoc%E5%AE%89%E6%8E%92%E5%BE%97%E6%98%8E%E6%98%8E%E7%99%BD%E7%99%BD/">June 25th 2025, 9:16:25 am</a>
+            <p>更新日期：<a href="https://blog.icanshock.fun/2025/06/25/%E8%BF%98%E5%9C%A8%E4%B8%BA%E5%86%99%E6%B3%A8%E9%87%8A%E7%83%A6%E6%81%BC%EF%BC%9F%E8%BF%99%E6%AC%BEAI%E6%8F%92%E4%BB%B6%E8%83%BD%E5%B8%AE%E4%BD%A0%E6%8A%8AJavaDoc%E5%AE%89%E6%8E%92%E5%BE%97%E6%98%8E%E6%98%8E%E7%99%BD%E7%99%BD/">June 25th 2025, 9:25:49 am</a>
+            <p>版权声明：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
+                <div class="nextSlogan">Next Post</div>
+                <a href="/2025/06/25/git%E5%88%86%E6%94%AF%E6%96%B0%E5%BB%BA%E5%88%A0%E9%99%A4/" title="git分支新建删除">
+                    <div class="nextTitle">git分支新建删除</div>
+                </a>
+        </li>
+        <li class="previous">
+        </li>
+    </ul>
+    <!-- comment -->
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
+
+            
+            
+            
+            <!-- utteranc评论 -->
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+            
+            
+            
+        </div>
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
+    <!-- Mathjax -->
+</main>
+
+                <!-- profile -->
+            </div>
+            <footer class="footer footer-unloaded">
+    <!-- social  -->
+        <div class="social">
+                            <a href="mailto:12345@qq.com" class="iconfont-archer email" title="email" ></a>
+                <a href="https://github.com/huangbh2020/huangbh2020.github.io" class="iconfont-archer github" target="_blank" title="github"></a>
+
+        </div>
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- website approve for Chinese user -->
+    <!-- 不蒜子  -->
+        <div class="busuanzi-container">
+                <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+        </div>
+</footer>
+
+        </div>
+        <!-- toc -->
+            <div class="toc-wrapper toc-wrapper-loding" style=    top:50vh;
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#title-git%E5%88%86%E6%94%AF%E6%96%B0%E5%BB%BA%E5%88%A0%E9%99%A4"><span class="toc-number">1.</span> <span class="toc-text">title: git分支新建删除</span></a></li></ol>
+            </div>
+        <!-- sidebar -->
+        <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+        <div class="sidebar-panel-archives">
+    <!-- 在 ejs 中将 archive 按照时间排序 -->
+        
+        
+        
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 3
+        </div>
+        <!-- search  -->
+    </div>
+    <div class="post-archive">
+            <div class="archive-year"> 2025 </div>
+            <ul class="year-list">
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/25</span>
+            <a class="archive-post-title" href="/2025/06/25/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%AE%B6%E6%97%8F%EF%BC%9AthreadPoolTaskExecutor/">线程池家族：threadPoolTaskExecutor的介绍</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/25</span>
+            <a class="archive-post-title" href="/2025/06/25/git%E5%88%86%E6%94%AF%E6%96%B0%E5%BB%BA%E5%88%A0%E9%99%A4/">git分支新建删除</a>
+        </li>
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/25</span>
+            <a class="archive-post-title" href="/2025/06/25/%E8%BF%98%E5%9C%A8%E4%B8%BA%E5%86%99%E6%B3%A8%E9%87%8A%E7%83%A6%E6%81%BC%EF%BC%9F%E8%BF%99%E6%AC%BEAI%E6%8F%92%E4%BB%B6%E8%83%BD%E5%B8%AE%E4%BD%A0%E6%8A%8AJavaDoc%E5%AE%89%E6%8E%92%E5%BE%97%E6%98%8E%E6%98%8E%E7%99%BD%E7%99%BD/">还在为写注释烦恼？这款AI插件能帮你把JavaDoc安排得明明白白</a>
+        </li>
+            </ul>
+    </div>
+</div>
+
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+            <span class="sidebar-tag-name" data-tags="git">
+                <span class="iconfont-archer">&#xe606;</span>
+                git
+            </span>
+            <span class="sidebar-tag-name" data-tags="java">
+                <span class="iconfont-archer">&#xe606;</span>
+                java
+            </span>
+            <span class="sidebar-tag-name" data-tags="智能注释">
+                <span class="iconfont-archer">&#xe606;</span>
+                智能注释
+            </span>
+            <span class="sidebar-tag-name" data-tags="智普">
+                <span class="iconfont-archer">&#xe606;</span>
+                智普
+            </span>
+            <span class="sidebar-tag-name" data-tags="IDEA插件">
+                <span class="iconfont-archer">&#xe606;</span>
+                IDEA插件
+            </span>
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+        缺失模块，请参考主题文档进行安装配置：https://github.com/fi3ework/hexo-theme-archer#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+        <span class="sidebar-category-name" data-categories="git">
+            <span class="iconfont-archer">&#xe60a;</span>
+            git
+        </span>
+        <span class="sidebar-category-name" data-categories="java">
+            <span class="iconfont-archer">&#xe60a;</span>
+            java
+        </span>
+        <span class="sidebar-category-name" data-categories="IDEA插件">
+            <span class="iconfont-archer">&#xe60a;</span>
+            IDEA插件
+        </span>
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+
+    </div>
+</div>
+
+        <!-- site-meta -->
+        <script>
+    var siteMetaRoot = "/"
+    if (siteMetaRoot === "undefined") {
+        siteMetaRoot = '/'
+    }
+    var siteMeta = {
+        url: "https://blog.icanshock.fun",
+        root: siteMetaRoot,
+        author: "huangbh"
+    }
+</script>
+
+        <!-- import experimental options here -->
+        <!-- Custom Font -->
+
+        <!-- main func -->
+        <script src="/scripts/main.js"></script>
+        <!-- fancybox -->
+        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.umd.js" onload="window.Fancybox.bind('[data-fancybox]')" defer></script>
+        <!-- algolia -->
+        <!-- busuanzi -->
+            <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+        <!-- async load share.js -->
+            <script src="/scripts/share.js" async></script>
+        <!-- mermaid -->
+    </body>
+</html>
