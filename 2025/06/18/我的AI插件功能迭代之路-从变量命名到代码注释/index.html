@@ -1,0 +1,190 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>我的AI插件功能迭代之路：从变量命名到代码注释 | 麦麦的小站</title><meta name="author" content="我会冲击波"><meta name="copyright" content="我会冲击波"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="喜悦之后的短暂迷茫上一篇提到，我的变量命名插件上线后，没过多久就收获了几十个用户的下载。这对我来说是巨大的鼓舞，感觉自己的小作品被大家需要和认可，非常开心。既然这么多人喜欢，我也不能让大家失望，得赶紧加入些新功能！ 但问题来了，要加什么新功能呢？我苦思冥想了好几天，却没什么好点子。于是，插件的更新就这么停滞了下来。 灵感总在不经意间闪现几天后，就在我日常写代码时，转机出现了。我写完一个颇为复杂的方">
+<meta property="og:type" content="article">
+<meta property="og:title" content="我的AI插件功能迭代之路：从变量命名到代码注释">
+<meta property="og:url" content="https://blog.icanshock.fun/2025/06/18/%E6%88%91%E7%9A%84AI%E6%8F%92%E4%BB%B6%E5%8A%9F%E8%83%BD%E8%BF%AD%E4%BB%A3%E4%B9%8B%E8%B7%AF-%E4%BB%8E%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E5%88%B0%E4%BB%A3%E7%A0%81%E6%B3%A8%E9%87%8A/index.html">
+<meta property="og:site_name" content="麦麦的小站">
+<meta property="og:description" content="喜悦之后的短暂迷茫上一篇提到，我的变量命名插件上线后，没过多久就收获了几十个用户的下载。这对我来说是巨大的鼓舞，感觉自己的小作品被大家需要和认可，非常开心。既然这么多人喜欢，我也不能让大家失望，得赶紧加入些新功能！ 但问题来了，要加什么新功能呢？我苦思冥想了好几天，却没什么好点子。于是，插件的更新就这么停滞了下来。 灵感总在不经意间闪现几天后，就在我日常写代码时，转机出现了。我写完一个颇为复杂的方">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.icanshock.fun/img/shock.png">
+<meta property="article:published_time" content="2025-06-18T06:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-29T13:55:43.336Z">
+<meta property="article:author" content="我会冲击波">
+<meta property="article:tag" content="IDEA插件">
+<meta property="article:tag" content="AI开发">
+<meta property="article:tag" content="代码注释">
+<meta property="article:tag" content="个人项目">
+<meta property="article:tag" content="程序员">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.icanshock.fun/img/shock.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "我的AI插件功能迭代之路：从变量命名到代码注释",
+  "url": "https://blog.icanshock.fun/2025/06/18/%E6%88%91%E7%9A%84AI%E6%8F%92%E4%BB%B6%E5%8A%9F%E8%83%BD%E8%BF%AD%E4%BB%A3%E4%B9%8B%E8%B7%AF-%E4%BB%8E%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E5%88%B0%E4%BB%A3%E7%A0%81%E6%B3%A8%E9%87%8A/",
+  "image": "https://blog.icanshock.fun/img/shock.png",
+  "datePublished": "2025-06-18T06:00:00.000Z",
+  "dateModified": "2025-06-29T13:55:43.336Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "我会冲击波",
+      "url": "https://blog.icanshock.fun/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/shock.png"><link rel="canonical" href="https://blog.icanshock.fun/2025/06/18/%E6%88%91%E7%9A%84AI%E6%8F%92%E4%BB%B6%E5%8A%9F%E8%83%BD%E8%BF%AD%E4%BB%A3%E4%B9%8B%E8%B7%AF-%E4%BB%8E%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E5%88%B0%E4%BB%A3%E7%A0%81%E6%B3%A8%E9%87%8A/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?4232bd328f402b21906c9004bead413c";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+btf.addGlobalFn('pjaxComplete', () => {
+  _hmt.push(['_trackPageview',window.location.pathname])
+}, 'baidu_analytics')
+</script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.json","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '我的AI插件功能迭代之路：从变量命名到代码注释',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/shock.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">20</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url(/img/bg.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">麦麦的小站</span></a><a class="nav-page-title" href="/"><span class="site-name">我的AI插件功能迭代之路：从变量命名到代码注释</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">我的AI插件功能迭代之路：从变量命名到代码注释</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-06-18T06:00:00.000Z" title="发表于 2025-06-18 14:00:00">2025-06-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-06-29T13:55:43.336Z" title="更新于 2025-06-29 21:55:43">2025-06-29</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%BB%A3%E7%A0%81%E4%BA%BA%E7%94%9F/">代码人生</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h3 id="喜悦之后的短暂迷茫"><a href="#喜悦之后的短暂迷茫" class="headerlink" title="喜悦之后的短暂迷茫"></a>喜悦之后的短暂迷茫</h3><p>上一篇提到，我的<a target="_blank" rel="noopener" href="https://plugins.jetbrains.com/plugin/27609-easy-naming?noRedirect=true">变量命名插件</a>上线后，没过多久就收获了几十个用户的下载。这对我来说是巨大的鼓舞，感觉自己的小作品被大家需要和认可，非常开心。既然这么多人喜欢，我也不能让大家失望，得赶紧加入些新功能！<br><img src="/img/2025/05/29/1.png" alt="插件截图"></p>
+<p>但问题来了，要加什么新功能呢？我苦思冥想了好几天，却没什么好点子。于是，插件的更新就这么停滞了下来。</p>
+<h3 id="灵感总在不经意间闪现"><a href="#灵感总在不经意间闪现" class="headerlink" title="灵感总在不经意间闪现"></a>灵感总在不经意间闪现</h3><p>几天后，就在我日常写代码时，转机出现了。我写完一个颇为复杂的方法，习惯性地想用一款常用的注释插件来生成 Javadoc。然而，生成后的注释效果让我大失所望——基本上就是生硬的机器翻译，可读性很差，根本无法准确描述方法的功能。</p>
+<p>我盯着那段糟糕的注释，突然灵机一动：既然这个注释插件不好用，效果这么差，<strong>我为什么不在自己的插件里，用大模型的能力来实现一个智能代码注释功能呢？</strong></p>
+<p>这个想法让我瞬间兴奋起来。这不就是我一直在找的新功能方向吗？</p>
+<h3 id="攻克最难的“一厘米”"><a href="#攻克最难的“一厘米”" class="headerlink" title="攻克最难的“一厘米”"></a>攻克最难的“一厘米”</h3><p>有了想法，就立刻开干。在做的过程中，我发现最困难的环节，竟然不是如何设计 Prompt 让大模型理解代码并生成高质量的注释，而是一个看起来很简单的工程问题：<strong>生成的注释，如何精准地粘贴回代码里对应方法的开头位置？</strong></p>
+<p>这涉及到对 IDEA 插件 API 的深度理解，需要准确地分析代码的抽象语法树（AST），找到方法的起始点，并执行插入操作。经过好几天的研究、尝试和失败，我终于找到了一个稳定可靠的方案，成功实现了这个功能。</p>
+<p>当看到插件能完美地将AI生成的注释，分毫不差地添加到方法定义的上方时，我知道，成了！</p>
+<h3 id="新版本，新起点"><a href="#新版本，新起点" class="headerlink" title="新版本，新起点"></a>新版本，新起点</h3><p>功能完成后，我马不停蹄地打包、提交审核。经过两天的等待，新版本如约而至。用户的反馈是积极的，经过几天的自然增长，插件的用户数顺利突破了100大关！</p>
+<p>当然，新的问题也随之而来。有用户反馈，插件在 PhpStorm 和 PyCharm 中无法使用。这确实是我初期没有考虑到的兼容性问题。看来，要让更多不同语言的开发者用上它，我后续还有不少工作要做。<br><img src="/img/2025/05/29/2.png" alt="插件截图"></p>
+<h3 id="下一步：如何让更多人知道它？"><a href="#下一步：如何让更多人知道它？" class="headerlink" title="下一步：如何让更多人知道它？"></a>下一步：如何让更多人知道它？</h3><p>现在，我的插件不仅能做变量命名，还能生成高质量的代码注释，功能感觉越来越齐全了。但酒香也怕巷子深，新的瓶颈出现了——<strong>推广</strong>。</p>
+<p>我实在不知道如何有效地推广自己的个人项目。所以，也想在这里向各位前辈和朋友们请教：</p>
+<p><strong>有没有大神可以教教我，如何推广一款个人开发的插件？</strong></p>
+<p>非常感谢大家的任何建议！</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://blog.icanshock.fun">我会冲击波</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blog.icanshock.fun/2025/06/18/%E6%88%91%E7%9A%84AI%E6%8F%92%E4%BB%B6%E5%8A%9F%E8%83%BD%E8%BF%AD%E4%BB%A3%E4%B9%8B%E8%B7%AF-%E4%BB%8E%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E5%88%B0%E4%BB%A3%E7%A0%81%E6%B3%A8%E9%87%8A/">https://blog.icanshock.fun/2025/06/18/%E6%88%91%E7%9A%84AI%E6%8F%92%E4%BB%B6%E5%8A%9F%E8%83%BD%E8%BF%AD%E4%BB%A3%E4%B9%8B%E8%B7%AF-%E4%BB%8E%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E5%88%B0%E4%BB%A3%E7%A0%81%E6%B3%A8%E9%87%8A/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://blog.icanshock.fun" target="_blank">麦麦的小站</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/IDEA%E6%8F%92%E4%BB%B6/">IDEA插件</a><a class="post-meta__tags" href="/tags/AI%E5%BC%80%E5%8F%91/">AI开发</a><a class="post-meta__tags" href="/tags/%E4%BB%A3%E7%A0%81%E6%B3%A8%E9%87%8A/">代码注释</a><a class="post-meta__tags" href="/tags/%E4%B8%AA%E4%BA%BA%E9%A1%B9%E7%9B%AE/">个人项目</a><a class="post-meta__tags" href="/tags/%E7%A8%8B%E5%BA%8F%E5%91%98/">程序员</a></div><div class="post-share"><div class="social-share" data-image="/img/shock.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2025/05/29/%E4%BB%8E%E7%BD%91%E9%A1%B5%E5%88%B0%E6%8F%92%E4%BB%B6-%E6%88%91%E7%9A%84%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E5%B7%A5%E5%85%B7%E8%BF%9B%E5%8C%96%E8%AE%BA/" title="从网页到插件：我的变量命名工具进化论"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">从网页到插件：我的变量命名工具进化论</div></div><div class="info-2"><div class="info-item-1">从网页到插件：一次提效的进化上一篇文章我分享了自己为什么要做一个变量命名网站，在网站上线后，我成了它的忠实用户。在日常工作中，它确实帮我解决了不少命名烦恼，我甚至还特意用它把我之前一些项目的老代码，都重新优化了一遍命名。 但是，用着用着，我发现了一个很影响“沉浸式编码”的问题，或者说是一个新的需求。 “复制-粘贴”的低效循环我的典型工作流是这样的：  在 IDEA 里写代码，遇到一个需要命名的变量，用中文注释写下它的含义。 选中这段中文，Ctrl+C。 切换到浏览器，找到我的命名网站，Ctrl+V。 点击生成，然后从网页上 Ctrl+C 复制回满意的变量名。 再切回 IDEA，Ctrl+V 粘贴到代码里。  整个过程虽然不长，但频繁的“复制-切换-粘贴”打断了连贯的编程思路，效率还是不够高。作为一个追求极致效率的程序员，这怎么能忍？ 于是，一个大胆的想法冒了出来：为什么不直接在 IDEA 里搞定这一切呢？我要做一个插件！ 说干就干，即使我是个“插件小白”“说干就干”是程序员的美德，但问题是——我从没搞过 IDEA...</div></div></div></a><a class="pagination-related" href="/2025/06/29/%E6%88%91%E7%9A%84AI%E6%8F%92%E4%BB%B6%E6%8E%A8%E5%B9%BF%E4%B9%8B%E8%B7%AF-%E4%B8%80%E4%B8%AA%E5%BC%80%E5%8F%91%E8%80%85%E7%9A%84%E6%B1%82%E5%8A%A9/" title="我的AI插件推广之路：一个开发者的求助"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">我的AI插件推广之路：一个开发者的求助</div></div><div class="info-2"><div class="info-item-1">...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/05/29/%E4%BB%8E%E7%BD%91%E9%A1%B5%E5%88%B0%E6%8F%92%E4%BB%B6-%E6%88%91%E7%9A%84%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E5%B7%A5%E5%85%B7%E8%BF%9B%E5%8C%96%E8%AE%BA/" title="从网页到插件：我的变量命名工具进化论"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-05-29</div><div class="info-item-2">从网页到插件：我的变量命名工具进化论</div></div><div class="info-2"><div class="info-item-1">从网页到插件：一次提效的进化上一篇文章我分享了自己为什么要做一个变量命名网站，在网站上线后，我成了它的忠实用户。在日常工作中，它确实帮我解决了不少命名烦恼，我甚至还特意用它把我之前一些项目的老代码，都重新优化了一遍命名。 但是，用着用着，我发现了一个很影响“沉浸式编码”的问题，或者说是一个新的需求。 “复制-粘贴”的低效循环我的典型工作流是这样的：  在 IDEA 里写代码，遇到一个需要命名的变量，用中文注释写下它的含义。 选中这段中文，Ctrl+C。 切换到浏览器，找到我的命名网站，Ctrl+V。 点击生成，然后从网页上 Ctrl+C 复制回满意的变量名。 再切回 IDEA，Ctrl+V 粘贴到代码里。  整个过程虽然不长，但频繁的“复制-切换-粘贴”打断了连贯的编程思路，效率还是不够高。作为一个追求极致效率的程序员，这怎么能忍？ 于是，一个大胆的想法冒了出来：为什么不直接在 IDEA 里搞定这一切呢？我要做一个插件！ 说干就干，即使我是个“插件小白”“说干就干”是程序员的美德，但问题是——我从没搞过 IDEA...</div></div></div></a><a class="pagination-related" href="/2025/06/29/%E6%88%91%E7%9A%84AI%E6%8F%92%E4%BB%B6%E6%8E%A8%E5%B9%BF%E4%B9%8B%E8%B7%AF-%E4%B8%80%E4%B8%AA%E5%BC%80%E5%8F%91%E8%80%85%E7%9A%84%E6%B1%82%E5%8A%A9/" title="我的AI插件推广之路：一个开发者的求助"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-06-29</div><div class="info-item-2">我的AI插件推广之路：一个开发者的求助</div></div><div class="info-2"><div class="info-item-1">...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/shock.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">我会冲击波</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">20</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://www.icanshock.fun/"><i class="fab fa-github"></i><span>关注我</span></a></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%96%9C%E6%82%A6%E4%B9%8B%E5%90%8E%E7%9A%84%E7%9F%AD%E6%9A%82%E8%BF%B7%E8%8C%AB"><span class="toc-number">1.</span> <span class="toc-text">喜悦之后的短暂迷茫</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%81%B5%E6%84%9F%E6%80%BB%E5%9C%A8%E4%B8%8D%E7%BB%8F%E6%84%8F%E9%97%B4%E9%97%AA%E7%8E%B0"><span class="toc-number">2.</span> <span class="toc-text">灵感总在不经意间闪现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BB%E5%85%8B%E6%9C%80%E9%9A%BE%E7%9A%84%E2%80%9C%E4%B8%80%E5%8E%98%E7%B1%B3%E2%80%9D"><span class="toc-number">3.</span> <span class="toc-text">攻克最难的“一厘米”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B0%E7%89%88%E6%9C%AC%EF%BC%8C%E6%96%B0%E8%B5%B7%E7%82%B9"><span class="toc-number">4.</span> <span class="toc-text">新版本，新起点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E4%B8%80%E6%AD%A5%EF%BC%9A%E5%A6%82%E4%BD%95%E8%AE%A9%E6%9B%B4%E5%A4%9A%E4%BA%BA%E7%9F%A5%E9%81%93%E5%AE%83%EF%BC%9F"><span class="toc-number">5.</span> <span class="toc-text">下一步：如何让更多人知道它？</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/06/29/Hexo%E5%8D%9A%E5%AE%A2%E6%8E%A5%E5%85%A5%E7%99%BE%E5%BA%A6%E7%BB%9F%E8%AE%A1%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/" title="Hexo博客接入百度统计详细教程">Hexo博客接入百度统计详细教程</a><time datetime="2025-06-29T12:00:00.000Z" title="发表于 2025-06-29 20:00:00">2025-06-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/06/29/%E6%88%91%E7%9A%84AI%E6%8F%92%E4%BB%B6%E6%8E%A8%E5%B9%BF%E4%B9%8B%E8%B7%AF-%E4%B8%80%E4%B8%AA%E5%BC%80%E5%8F%91%E8%80%85%E7%9A%84%E6%B1%82%E5%8A%A9/" title="我的AI插件推广之路：一个开发者的求助">我的AI插件推广之路：一个开发者的求助</a><time datetime="2025-06-29T10:00:00.000Z" title="发表于 2025-06-29 18:00:00">2025-06-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/06/18/%E6%88%91%E7%9A%84AI%E6%8F%92%E4%BB%B6%E5%8A%9F%E8%83%BD%E8%BF%AD%E4%BB%A3%E4%B9%8B%E8%B7%AF-%E4%BB%8E%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E5%88%B0%E4%BB%A3%E7%A0%81%E6%B3%A8%E9%87%8A/" title="我的AI插件功能迭代之路：从变量命名到代码注释">我的AI插件功能迭代之路：从变量命名到代码注释</a><time datetime="2025-06-18T06:00:00.000Z" title="发表于 2025-06-18 14:00:00">2025-06-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/29/%E4%BB%8E%E7%BD%91%E9%A1%B5%E5%88%B0%E6%8F%92%E4%BB%B6-%E6%88%91%E7%9A%84%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E5%B7%A5%E5%85%B7%E8%BF%9B%E5%8C%96%E8%AE%BA/" title="从网页到插件：我的变量命名工具进化论">从网页到插件：我的变量命名工具进化论</a><time datetime="2025-05-29T04:00:00.000Z" title="发表于 2025-05-29 12:00:00">2025-05-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/05/21/%E4%BB%8B%E7%BB%8D%E4%B8%80%E6%AC%BE%E5%A5%BD%E7%94%A8%E7%9A%84%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E7%BD%91%E7%AB%99/" title="介绍一款好用的变量命名网站">介绍一款好用的变量命名网站</a><time datetime="2025-05-21T03:00:00.000Z" title="发表于 2025-05-21 11:00:00">2025-05-21</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2025 By 我会冲击波</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://blog.icanshock.fun/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
